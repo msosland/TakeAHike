@@ -1,18 +1,21 @@
 
 var map;
 
-function initMap() {
-  var myLatLng = {lat: 41.83, lng: -87.68};
+var initMap = function (places, cen) {
+  var myLatLng = {lat: 41.878, lng: -87.629};
+
 
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
-    center: myLatLng
+    center: cen
   });
 
-  var marker = new google.maps.Marker({
-    position: myLatLng,
+  places.forEach(function(place) {
+    var marker = new google.maps.Marker({
+    position: place,
     map: map,
     title: 'Hello World!'
   });
-}
+  });
+};
 

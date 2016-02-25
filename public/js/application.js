@@ -6,10 +6,11 @@ $(document).ready(function() {
       url: "https://maps.googleapis.com/maps/api/geocode/json?" + coords + "&key=KEY",
       type: "GET"
     }).done(function(response) {
-      var lat = response["results"][0]["geometry"]["location"]["lat"];
-      var lon = response["results"][0]["geometry"]["location"]["lng"]
+      var latc = response["results"][0]["geometry"]["location"]["lat"];
+      var longi = response["results"][0]["geometry"]["location"]["lng"];
+      var cen = {lat: latc, lng: longi};
       $.ajax({
-      url: "https://trailapi-trailapi.p.mashape.com/?limit=25&radius=200&lat=" + lat + "&lon=" + lon + "&q[activities_activity_type_name_eq]=hiking",
+      url: "https://trailapi-trailapi.p.mashape.com/?limit=25&radius=200&lat=" + latc + "&lon=" + longi + "&q[activities_activity_type_name_eq]=hiking",
       type: "GET",
       xhrFields:
       {
@@ -20,7 +21,8 @@ $(document).ready(function() {
       }}).done(function(response) {
         $.post("/places", response)
         .done(function(response) {
-          $('#start').after(response);
+          initMap(response, cen);
+          // $('#map').show();
         })
       });
     });
