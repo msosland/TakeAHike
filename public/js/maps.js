@@ -9,6 +9,8 @@ var initMap = function (places, cen) {
     center: cen
   });
 
+  var elevator = new google.maps.ElevationService();
+
   var infowindow = new google.maps.InfoWindow();
 
   places.forEach(function(place) {
@@ -17,9 +19,24 @@ var initMap = function (places, cen) {
       map: map,
       title: 'Hello World!'
     });
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(place.name + "<br>" + place.city + place.description + "<br><img src='" + place.thumbnail + "'>");
+    google.maps.event.addListener(marker, 'click', function(event) {
+      var position = marker.getPosition();
+      displayLocationElevation(event.latLng, elevator, infowindow, place);
+      map.setCenter(position);
       infowindow.open(map, this);
     });
+  });
+};
+
+function displayLocationElevation(location, elevator, infowindow, place) {
+  // Initiate the location request
+  elevator.getElevationForLocations({
+    'locations': [location]
+  }, function(results, status) {
+    infowindow.setPosition(location);
+    if (status === google.maps.ElevationStatus.OK) {
+      var elev = results[0]["elevation"].toString();
+      infowindow.setContent("<div class='info'>" + place.name + "<br>" + place.city + "<br>" + place.description + "</div><br>" + elev);
+    }
   });
 };

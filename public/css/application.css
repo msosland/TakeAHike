@@ -1,3 +1,17 @@
-/*#map {
-  display: none;
-}*/
+#map {
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 10%;
+  right: 10%;
+  /*opacity: 0;*/
+}
+
+body {
+  background: url("http://i.imgur.com/V2imST5.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+ .info {
+  display: table;
+  max-width: 150px;
+ }
