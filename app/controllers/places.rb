@@ -1,7 +1,7 @@
 post '/places' do
   places = parse_response(params)
-  @markers = make_markers_array(places)
+  # @markers = make_markers_array(places)
   @places = places.map {|place| Place.find_or_create_by!(place)}
   content_type :json
-  @markers.to_json
+  @places.to_json
 end

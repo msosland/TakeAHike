@@ -3,7 +3,7 @@ $(document).ready(function() {
     e.preventDefault();
     var coords = $(this).serialize();
     $.ajax({
-      url: "https://maps.googleapis.com/maps/api/geocode/json?" + coords + "&key=KEY",
+      url: "https://maps.googleapis.com/maps/api/geocode/json?" + coords + "&key=key",
       type: "GET"
     }).done(function(response) {
       var latc = response["results"][0]["geometry"]["location"]["lat"];
@@ -17,8 +17,9 @@ $(document).ready(function() {
         withCredentials: true
       },
       beforeSend: function (xhr) {
-        xhr.setRequestHeader('X-Mashape-Key', 'KEY');
+        xhr.setRequestHeader('X-Mashape-Key', 'key');
       }}).done(function(response) {
+        var xyz = response;
         $.post("/places", response)
         .done(function(response) {
           initMap(response, cen);
