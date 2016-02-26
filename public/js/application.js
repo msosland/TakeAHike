@@ -23,10 +23,17 @@ $(document).ready(function() {
         $.post("/places", response)
         .done(function(response) {
           initMap(response, cen);
-          // $('#map').show();
+          $('#start').animate({"margin-left": "-=4000px"}, 2000);
+          $('#map').animate({opacity: 1.0, "left": "-=140%", "right": "+=140%"}, 3000);
+          $('.research').animate({opacity: 1.0}, 3000);
         })
       });
     });
+  });
+  $('.research').on('click', function() {
+    $(this).animate({opacity: 0.0}, 1000);
+    $('#start').animate({"margin-left": "+=4000px"}, 2000);
+    $('#map').animate({opacity: 0.0, "left": "+=140%", "right": "-=140%"}, 3000);
   });
 });
 
