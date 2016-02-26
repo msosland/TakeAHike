@@ -6,6 +6,9 @@ class CreatePlaces < ActiveRecord::Migration
       t.string :city
       t.string :state
       t.string :name
+      t.string :thumbnail
+      t.string :description
+      t.integer :unique_id, unique: true
       t.timestamps null: false
     end
   end
