@@ -3,7 +3,7 @@ $(document).ready(function() {
     e.preventDefault();
     var coords = $(this).serialize();
     $.ajax({
-      url: "https://maps.googleapis.com/maps/api/geocode/json?" + coords + "&key=KEY",
+      url: "https://maps.googleapis.com/maps/api/geocode/json?" + coords + "&key=key",
       type: "GET"
     }).done(function(response) {
       var latc = response["results"][0]["geometry"]["location"]["lat"];
@@ -17,7 +17,7 @@ $(document).ready(function() {
         withCredentials: true
       },
       beforeSend: function (xhr) {
-        xhr.setRequestHeader('X-Mashape-Key', 'KEY');
+        xhr.setRequestHeader('X-Mashape-Key', 'key');
       }}).done(function(response) {
         var xyz = response;
         $.post("/places", response)
@@ -25,9 +25,15 @@ $(document).ready(function() {
           initMap(response, cen);
           $('#start').animate({"margin-left": "-=4000px"}, 2000);
           $('#map').animate({opacity: 1.0, "left": "-=140%", "right": "+=140%"}, 3000);
+          $('.research').animate({opacity: 1.0}, 3000);
         })
       });
     });
+  });
+  $('.research').on('click', function() {
+    $(this).animate({opacity: 0.0}, 1000);
+    $('#start').animate({"margin-left": "+=4000px"}, 2000);
+    $('#map').animate({opacity: 0.0, "left": "+=140%", "right": "-=140%"}, 3000);
   });
 });
 
