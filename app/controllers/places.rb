@@ -5,3 +5,8 @@ post '/places' do
   content_type :json
   @places.to_json
 end
+
+get '/keys' do
+  content_type :json
+  {goog: ENV['GOOG1'], trakey: ENV['TRAKEY']}.to_json
+end
