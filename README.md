@@ -4,7 +4,7 @@
 
 A web application built with a Sinatra back-end that incorporates the TrailAPI and the Google Maps API. The app is hosted on Heroku and allows users to easily find hiking spots near them.
 
-Visit (http://gotakeahike.herokuapp.com/) to check out the app and find your next hiking journey.
+Visit http://gotakeahike.herokuapp.com to check out the app and find your next hiking journey.
 
 ##Contributors
 
